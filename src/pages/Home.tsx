@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { insert } from "../scripts/SupabaseTest"
+import { pollDB } from "../scripts/SupabaseHandler"
 import { MouseEventHandler } from "react"
 
 const ctrFlex = clsx(
@@ -44,6 +44,17 @@ function Button({ func, text = "Click Me!" }: ButtonProps) {
   )
 }
 
+function logPolledDB() {
+  // poll and log database
+  pollDB()
+    .then((result) => {
+      console.log("Polled DB successfully!")
+      for (const entry of result) {
+        console.log(JSON.stringify(entry))
+      }
+    })
+}
+
 export default function Home() {
   const containerStyle = clsx(
     "w-screen h-screen",
@@ -51,7 +62,7 @@ export default function Home() {
   )
   return (
     <div className={containerStyle}>
-      <Button func={insert} text="Upload to Supabase!" />
+      <Button func={logPolledDB} text="Log database" />
     </div>
   )
 }
