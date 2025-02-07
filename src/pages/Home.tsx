@@ -16,7 +16,7 @@ interface ButtonProps {
 }
 
 function Button({ func, text = "Click Me!" }: ButtonProps) {
-  const bgStyle = clsx(
+  const bg = clsx(
     anim,
     ctrFlex,
     "cursor-pointer",
@@ -30,15 +30,15 @@ function Button({ func, text = "Click Me!" }: ButtonProps) {
     "active:bg-red-800"
   )
 
-  const textStyle = clsx(
+  const textStyles = clsx(
     "text-white",
     "font-bold"
   )
 
   return (
     <button onClick={func}>
-      <div className={bgStyle}>
-        <h1 className={textStyle}>{text}</h1>
+      <div className={bg}>
+        <h1 className={textStyles}>{text}</h1>
       </div>
     </button>
   )
@@ -55,14 +55,100 @@ function logPolledDB() {
     })
 }
 
+interface WordleTileProps {
+  color: string
+}
+
+function WordleTile({ color }: WordleTileProps) {
+  const styles = clsx(
+    "w-[20%]",
+    "h-[15%]",
+    "aspect-[1/1]",
+    "rounded-[4px]",
+    "scale-[90%]"
+  )
+
+  return (
+    <div className={styles} style={{ backgroundColor: color }}>
+    </div >
+  )
+}
+
+interface WordleProps {
+  tiles?: React.ReactNode // use reactnode for child
+}
+
+export function Wordle({ tiles }: WordleProps) {
+  const container = clsx(
+    "w-[200px]",
+    "bg-black",
+    "rounded-[30px]",
+    "pt-[12.5px]",
+    "pb-[15px]"
+  )
+
+  const text = clsx(
+    "font-bold",
+    "text-white",
+    "flex",
+    "justify-center"
+  )
+
+  const tileContainer = clsx(
+    "flex",
+    "flex-row",
+    "flex-wrap",
+    "m-[5%]",
+    "justify-left",
+    "items-center"
+  )
+
+  const dimText = clsx(
+    "font-bold",
+    "text-gray-500",
+    "text-[12px]",
+    "flex",
+    "justify-center"
+  )
+
+  return (
+    <div className={container}>
+      <span className={text}>13,200</span>
+      <div className={tileContainer}>
+        {tiles}
+      </div>
+      <span className={text}>4/6</span>
+      <span className={dimText}>12/12/2024</span>
+    </ div >
+  )
+}
+
 export default function Home() {
-  const containerStyle = clsx(
+  const container = clsx(
     "w-screen h-screen",
     ctrFlex,
   )
+
+  const tiles = (
+    <>
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+      <WordleTile color="#00ff00" />
+    </>
+  )
+
   return (
-    <div className={containerStyle}>
-      <Button func={logPolledDB} text="Log database" />
+    <div className={container}>
+      <Button func={logPolledDB} />
+      <Wordle tiles={tiles} />
     </div>
   )
 }
