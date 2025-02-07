@@ -1,5 +1,6 @@
 import clsx from "clsx"
 import { insert } from "../scripts/SupabaseTest"
+import { MouseEventHandler } from "react"
 
 const ctrFlex = clsx(
   "flex items-center justify-center",
@@ -9,7 +10,12 @@ const anim = clsx(
   "transition-color duration-[0.3s]"
 )
 
-function Button() {
+interface ButtonProps {
+  func?: MouseEventHandler<HTMLButtonElement>
+  text?: string
+}
+
+function Button({ func, text = "Click Me!" }: ButtonProps) {
   const bgStyle = clsx(
     anim,
     ctrFlex,
@@ -30,9 +36,9 @@ function Button() {
   )
 
   return (
-    <button onClick={insert}>
+    <button onClick={func}>
       <div className={bgStyle}>
-        <h1 className={textStyle}>Upload to Supabase!</h1>
+        <h1 className={textStyle}>{text}</h1>
       </div>
     </button>
   )
@@ -45,7 +51,7 @@ export default function Home() {
   )
   return (
     <div className={containerStyle}>
-      <Button />
+      <Button func={insert} text="Upload to Supabase!" />
     </div>
   )
 }

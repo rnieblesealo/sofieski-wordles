@@ -11,6 +11,8 @@ interface DBValue {
   value: string
 }
 
+// WARN: rls is OFF for this to work, and there ain't no way that's ok for business
+
 export async function insert(): Promise<void> { // NOTE: async = function may voluntarily pause execution using await 
 
   // Test vals, I don't think we can pass args to JSX click functions
