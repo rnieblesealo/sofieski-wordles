@@ -5,7 +5,13 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}", // WARN: careful with spaces in patternmatch!
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        funnel: ["Funnel Sans", "sans-serif"],
+        tiny5: ["Tiny5", "sans-serif"],
+        cuba: ["Playwrite CU", "serif"]
+      }
+    },
   },
   plugins: [],
 }

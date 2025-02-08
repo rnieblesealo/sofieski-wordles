@@ -9,7 +9,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 export interface WordleInfo {
   id?: number;
-  date?: string;
+  date: string;
   wordle_number: number;
   tries: number;
   grid: string;
