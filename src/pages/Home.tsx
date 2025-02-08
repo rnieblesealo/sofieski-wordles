@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { pollDB } from "../scripts/SupabaseHandler"
+import { supabase } from "../scripts/SupabaseHandler"
 import Wordle from "../components/Wordle"
 import { WordleTile } from "../components/Wordle"
 import { useState, useEffect } from "react"
@@ -24,44 +24,61 @@ export default function Home() {
     */
 
   useEffect(() => {
-    pollDB()
-      .then((results) => {
-        const generatedWordles = results.map((result) => {
+    // database poll function
+    const pollDB = async () => {
+      // grab data from db table
+      const { data, error } = await supabase.from("wordle_values").select("*")
+      if (error) {
+        throw error; // will abort if issue happened
+      }
 
-          // generate tiles
-          // NOTE: strings aren't inherently arrays in typescript; this is why we must split at "" to get individual chars
-          // we can then use .map (there is no .map for strings)
-          const tiles = result.grid.split("").map((code: string) => {
-            switch (code) {
-              case "w":
-                return <WordleTile color="#ffffff" />
-              case "y":
-                return <WordleTile color="#f3a833" />
-              case "g":
-                return <WordleTile color="#5ab552" />
-              default:
-                return <WordleTile color="#000000" />
-            }
-          })
-
-          // generate wordle
-          return (
-            <Wordle
-              tiles={tiles}
-              number={result.wordle_number}
-              tries={result.tries}
-              date={result.date ?? ""}
-            />
-          )
-
+      // generate wordles using data
+      const generatedWordles = data.map((result) => {
+        // NOTE: strings aren't inherently arrays in typescript; this is why we must split at "" to get individual chars
+        // we can then use .map (there is no .map for strings)
+        const tiles = result.grid.split("").map((code: string) => {
+          switch (code) {
+            case "w":
+              return <WordleTile color="#ffffff" />
+            case "y":
+              return <WordleTile color="#f3a833" />
+            case "g":
+              return <WordleTile color="#5ab552" />
+            default:
+              return <WordleTile color="#000000" />
+          }
         })
 
-        setWordles(generatedWordles)
+        // make component
+        return (
+          <Wordle
+            tiles={tiles}
+            number={result.wordle_number}
+            tries={result.tries}
+            date={result.date ?? ""}
+          />
+        )
+      })
 
+      // store generated components
+      setWordles(generatedWordles)
+    }
+
+    // subscription (newly updated to channel) to update on database modification
+    const channel = supabase
+      .channel("wordle_values")
+      .on("postgres_changes", { event: "*", schema: "public", table: "wordle_values" }, () => {
+        pollDB();
       })
-      .catch((error) => {
-        console.error("Unable to generate Wordle component: ", error)
-      })
+      .subscribe()
+
+    // fetch data initially
+    pollDB()
+
+    // return function of useeffect is cleanup
+    return () => {
+      supabase.removeChannel(channel)
+    }
   }, [])
 
   const mainContainer = clsx(

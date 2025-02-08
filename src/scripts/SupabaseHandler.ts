@@ -3,7 +3,7 @@ import { createClient } from "@supabase/supabase-js"
 const SUPABASE_URL: string = import.meta.env.VITE_SUPABASE_URL ?? ""
 const SUPABASE_KEY: string = import.meta.env.VITE_SUPABASE_KEY ?? ""
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 // WARN: rls is OFF for this to work, and there ain't no way that's ok for business
 
