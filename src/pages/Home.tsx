@@ -3,6 +3,7 @@ import { pollDB } from "../scripts/SupabaseHandler"
 import Wordle from "../components/Wordle"
 import { WordleTile } from "../components/Wordle"
 import { useState, useEffect } from "react"
+import { FaHeart } from "react-icons/fa";
 
 export default function Home() {
   const [wordles, setWordles] = useState<React.ReactNode[]>([])
@@ -65,22 +66,25 @@ export default function Home() {
 
   const mainContainer = clsx(
     "w-screen",
-    "h-screen",
     "flex",
     "flex-col",
     "items-center",
   )
 
   const gradient = clsx(
+    "w-screen",
+    "h-screen",
     "bg-gradient-to-b",
     "from-[#6E2C8D]",
     "via-[#CA207F]",
     "via-[#F3554C]",
-    "to-[#FBE156]"
+    "to-[#FBE156]",
+    "flex",
+    "flex-col"
   )
 
   const wordleContainer = clsx(
-    "w-screen",
+    "w-min-content",
     "h-min-content",
     "flex",
     "flex-wrap",
@@ -108,15 +112,55 @@ export default function Home() {
     "relative z-[0]",
   )
 
+  const jumpIn = clsx(
+    "animate-jump-in"
+  )
+
+  const flipUp = clsx(
+    "animate-flip-up",
+    "animate-once",
+    "animate-ease-out",
+    "animate-fill-both"
+  )
+
+  const footer = clsx(
+    "h-screen",
+    "text-black",
+    "font-funnel",
+    "text-[20px]",
+    "text-center",
+    "font-bold",
+    "flex",
+    "justify-center"
+  )
+
+  const signature = clsx(
+    "font-tiny5",
+    "font-bold",
+    "text-center",
+    "absolute",
+    "bottom-0",
+    "flex",
+    "justify-center",
+    "items-center",
+    "w-[100%]",
+    "gap-[5px]"
+  )
+
   return (
-    <div className={`${mainContainer} ${gradient} text-stroke`}>
-      <h1 className={titleContainer}>
-        <span className={title}>sofieski's wordels</span>
-        <img className={profileImage} src="public/sofieski.png" width="200px" />
-      </h1>
-      <div className={wordleContainer}>
-        {wordles}
-      </div>
+    <div className={gradient}>
+      <div className={mainContainer}>
+        <h1 className={titleContainer}>
+          <span className={`${title} ${flipUp}`}>sofieski's wordels</span>
+          <img className={`${profileImage} ${jumpIn}`} src="public/sofieski.png" width="200px" />
+        </h1>
+        <div className={wordleContainer}>
+          {wordles}
+        </div>
+      </div >
+      <footer className={footer}>
+        <span className={signature}>Built with <FaHeart color="#F90605" /> by Rafa</span>
+      </footer>
     </div >
   )
 }
