@@ -66,23 +66,12 @@ export default function Wordle({ tiles, number, tries, date }: WordleProps) {
     "justify-center"
   )
 
-  const boldText = clsx(
-    "flex",
-    "justify-center",
-    "text-white",
-    "font-bold"
-  )
-
-  const word = getWordForDate(date)
-  const formattedWord = word.charAt(0).toUpperCase() + word.slice(1)
-
   return (
     <div className={container}>
       <span className={text}>{number.toLocaleString()}</span>
       <div className={tileContainer}>
         {tiles}
       </div>
-      <span className={boldText}>{`"${formattedWord}"`}</span>
       <span className={smallText}>{`${tries}/6`}</span>
       <span className={dimText}>{formatDate(date)}</span>
     </ div >
