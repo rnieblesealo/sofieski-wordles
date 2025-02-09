@@ -111,16 +111,18 @@ export default function Home() {
   )
 
   const titleContainer = clsx(
-    "font-cuba",
-    "font-[800]",
-    "text-[64px]",
-    "text-white",
     "flex",
     "flex-row",
     "items-center",
   )
 
   const title = clsx(
+    "font-cuba",
+    "font-[800]",
+    "text-[40px]",
+    "md:text-[60px]",
+    "lg:text-[80px]",
+    "text-white",
     "text-center"
   )
 
@@ -154,12 +156,10 @@ export default function Home() {
   const signature = clsx(
     "font-tiny5",
     "font-bold",
-    "text-center",
-    "absolute",
-    "bottom-0",
     "flex",
     "justify-center",
     "items-center",
+    "self-end",
     "w-[100%]",
     "gap-[5px]"
   )
