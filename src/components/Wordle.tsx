@@ -1,8 +1,8 @@
 import clsx from "clsx"
-import { useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 import formatDate from "../scripts/formatDate"
 
-const sounds = [
+const brainrotSounds = [
   new Audio("sfx/brain-rot-7000.mp3"),
   new Audio("sfx/calk-tuah.mp3"),
   new Audio("sfx/get-out-memes.mp3"),
@@ -34,26 +34,22 @@ export function WordleTile({ color }: WordleTileProps) {
   )
 
   // play sounds when clicking tiles 
+
   // NOTE: refs are react pointers
   // they can hold direct refs to dom items/instances of stuff for direct mutation!
   // here we are using refs to the objects in our array to interact with them
   const soundRef = useRef<HTMLAudioElement | null>(null);
-  const playSound = () => {
-    // stop currently referenced sound and restart it
-    if (soundRef.current) {
-      soundRef.current.pause();
-    }
 
-    // grab an index, ts doesn't have a randint function for some dumbfuck reason
-    const randomSoundIndex = Math.floor(Math.random() * sounds.length)
+  // grab an index, ts doesn't have a randint function for some dumbfuck reason
+  const randomBrainrotIndex = Math.floor(Math.random() * brainrotSounds.length)
 
-    // replace reference for sound at the picked index, and play it!
-    soundRef.current = sounds[randomSoundIndex]
-    soundRef.current.play()
+  // call play function
+  const playBrainrot = () => {
+    playSoundWithRef(soundRef, brainrotSounds[randomBrainrotIndex])
   }
 
   return (
-    <button className={styles} style={{ backgroundColor: color }} onClick={playSound} />
+    <button className={styles} style={{ backgroundColor: color }} onClick={playBrainrot} />
   )
 }
 
@@ -67,37 +63,42 @@ interface WordleProps {
 export default function Wordle({ tiles, number, tries, date }: WordleProps) {
   const container = clsx(
     "w-[200px]",
+    "aspect-[1/1]",
+
     "bg-[#101415]",
-    "rounded-[30px]",
     "pt-[12.5px]",
     "pb-[15px]",
+
+    "rounded-[30px]",
+
     "shadow-[0px_0px_30px_rgba(0,0,0,0.6)]",
+
     "hover:shadow-[0px_0px_30px_rgba(255,255,255,1)]",
   )
 
   const boldText = clsx(
-    "font-funnel",
-    "font-bold",
     "text-white",
     "text-[20px]",
+
+    "font-funnel",
+    "font-bold",
+
     "flex",
+    "items-center",
     "justify-center"
   )
 
   const tileContainer = clsx(
-    "flex",
-    "flex-row",
-    "flex-wrap",
     "m-[5%]",
-    "justify-left",
-    "items-center"
   )
 
   const dimText = clsx(
     "font-funnel",
     "text-gray-500",
     "text-[12px]",
+
     "flex",
+    "items-center",
     "justify-center"
   )
 
@@ -105,7 +106,9 @@ export default function Wordle({ tiles, number, tries, date }: WordleProps) {
     "font-funnel",
     "text-white",
     "text-[12px]",
+
     "flex",
+    "items-center",
     "justify-center"
   )
 

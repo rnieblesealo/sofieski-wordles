@@ -3,6 +3,7 @@ import { supabase } from "../scripts/SupabaseHandler"
 import Wordle from "../components/Wordle"
 import { WordleTile } from "../components/Wordle"
 import { useState, useEffect } from "react"
+import { FaHeart } from "react-icons/fa6"
 
 export default function Home() {
   const [wordles, setWordles] = useState<React.ReactNode[]>([])
@@ -81,33 +82,41 @@ export default function Home() {
   }, [])
 
   const mainContainer = clsx(
-    "w-full",
-    "h-full",
     "flex",
     "flex-col",
     "items-center",
-    "overflow-hidden",
+
+    "gap-[10px]",
+
+    "h-screen",
+    "md:h-screen",
+    "lg:h-screen",
+
     "bg-gradient-to-b",
     "from-[#6E2C8D]",
     "via-[#CA207F]",
     "via-[#F3554C]",
     "to-[#FBE156]",
+
+    "overflow-x-hidden",
   )
 
   const wordleContainer = clsx(
-    "w-min-content",
-    "h-min-content",
-    "flex",
-    "flex-wrap",
-    "justify-center",
     "gap-[5px]",
-    "z-[1]"
+
+    "flex",
+    "flex-row",
+    "flex-wrap",
+    "items-center",
+    "justify-center",
   )
 
   const titleContainer = clsx(
     "flex",
     "flex-row",
     "items-center",
+
+    "h-min-content",
   )
 
   const title = clsx(
@@ -122,7 +131,8 @@ export default function Home() {
 
   const profileImage = clsx(
     "transform scale-[110%]",
-    "relative z-[0]",
+    "relative",
+    "z-[0]"
   )
 
   const jumpIn = clsx(
@@ -136,9 +146,39 @@ export default function Home() {
     "animate-fill-both"
   )
 
+  const footer = clsx(
+    "w-full",
+    "h-[30px]",
+
+    "flex",
+    "items-center",
+    "self-end",
+
+    "text-black",
+    "text-center",
+  )
+
+  const footerText = clsx(
+    "w-full",
+
+    "flex",
+    "flex-row",
+    "items-center",
+    "justify-center",
+
+    "gap-[5px]",
+
+    "font-bold",
+    "font-tiny5",
+  )
+
+  const heartbeat = clsx(
+    "animate-jump animate-infinite animate-ease-linear animate-alternate-reverse animate-fill-forwards"
+  )
+
   return (
-    <div className={mainContainer}>
-      <div className={"h-full overflow-y-auto"}>
+    <>
+      <div className={mainContainer}>
         <h1 className={titleContainer}>
           <span className={`${title} ${flipUp}`}>sofieski's wordels</span>
           <img className={`${profileImage} ${jumpIn}`} src="/sofieski.png" width="200px" />
@@ -146,7 +186,10 @@ export default function Home() {
         <div className={wordleContainer}>
           {wordles}
         </div>
+        <footer className={`${footer} ${jumpIn}`}>
+          <span className={footerText}>Made by Rafa with <FaHeart className={heartbeat} color="#F90605" /></span>
+        </footer>
       </div >
-    </div >
+    </>
   )
 }

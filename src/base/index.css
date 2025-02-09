@@ -4,9 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-  width: 100vw;
-  height: 100vh;
+/* Ensure, under all circumstances, that there is NO scrollable whitespace! */
+#root,
+html,
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+body {
+  /* background: linear-gradient(to bottom, #6E2C8D, #CA207F, #F3554C, #FBE156); */
 }
 
 .text-stroke {
