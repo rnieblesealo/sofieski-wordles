@@ -1,5 +1,5 @@
 import clsx from "clsx"
-import { useState, useEffect, useRef } from "react"
+import { useRef } from "react"
 import formatDate from "../scripts/formatDate"
 
 const brainrotSounds = [
@@ -10,6 +10,17 @@ const brainrotSounds = [
   new Audio("sfx/how-are-your-balls.mp3"),
   new Audio("sfx/what-help-me.mp3"),
 ]
+
+function playSoundWithRef(soundRef: React.RefObject<HTMLAudioElement | null>, sound: HTMLAudioElement) {
+  // stop currently referenced sound and restart it
+  if (soundRef.current) {
+    soundRef.current.pause();
+  }
+
+  // replace reference for sound at the picked index, and play it!
+  soundRef.current = sound
+  soundRef.current.play()
+}
 
 interface WordleTileProps {
   color: string
