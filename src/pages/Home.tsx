@@ -83,14 +83,15 @@ export default function Home() {
 
   const mainContainer = clsx(
     "w-screen",
+    "h-[98%]",
     "flex",
     "flex-col",
     "items-center",
   )
 
   const gradient = clsx(
-    "w-screen",
-    "h-screen",
+    "h-[100vh]",
+    "w-[100vw]",
     "bg-gradient-to-b",
     "from-[#6E2C8D]",
     "via-[#CA207F]",
@@ -174,10 +175,10 @@ export default function Home() {
         <div className={wordleContainer}>
           {wordles}
         </div>
+        <footer className={footer}>
+          <span className={signature}>Built with <FaHeart color="#F90605" /> by Rafa</span>
+        </footer>
       </div >
-      <footer className={footer}>
-        <span className={signature}>Built with <FaHeart color="#F90605" /> by Rafa</span>
-      </footer>
     </div >
   )
 }
