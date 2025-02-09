@@ -82,23 +82,23 @@ export default function Home() {
   }, [])
 
   const mainContainer = clsx(
-    "w-screen",
-    "h-[98%]",
+    "w-[100%]",
+    "h-[100%]",
     "flex",
     "flex-col",
     "items-center",
   )
 
   const gradient = clsx(
-    "h-[100vh]",
-    "w-[100vw]",
+    "flex",
+    "flex-col",
+    "w-full",
+    "h-full",
     "bg-gradient-to-b",
     "from-[#6E2C8D]",
     "via-[#CA207F]",
     "via-[#F3554C]",
     "to-[#FBE156]",
-    "flex",
-    "flex-col"
   )
 
   const wordleContainer = clsx(
@@ -144,7 +144,7 @@ export default function Home() {
   )
 
   const footer = clsx(
-    "h-screen",
+    "h-[100%]",
     "text-black",
     "font-funnel",
     "text-[20px]",

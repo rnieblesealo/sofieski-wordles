@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
 .text-stroke {
   -webkit-text-stroke: 15px black;
   paint-order: stroke markers fill;
