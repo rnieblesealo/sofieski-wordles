@@ -71,8 +71,7 @@ export default function Wordle({ tiles, number, tries, date }: WordleProps) {
     "rounded-[30px]",
     "pt-[12.5px]",
     "pb-[15px]",
-    "shadow-[0px_0px_30px_rgba(0,0,0,0.35)]",
-    
+    "shadow-[0px_0px_30px_rgba(0,0,0,0.6)]",
     "hover:shadow-[0px_0px_30px_rgba(255,255,255,1)]",
   )
 
