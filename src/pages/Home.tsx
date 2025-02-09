@@ -82,18 +82,12 @@ export default function Home() {
   }, [])
 
   const mainContainer = clsx(
-    "w-[100%]",
-    "h-[100%]",
+    "w-full",
+    "h-full",
     "flex",
     "flex-col",
     "items-center",
-  )
-
-  const gradient = clsx(
-    "flex",
-    "flex-col",
-    "w-full",
-    "h-full",
+    "overflow-hidden",
     "bg-gradient-to-b",
     "from-[#6E2C8D]",
     "via-[#CA207F]",
@@ -144,8 +138,9 @@ export default function Home() {
   )
 
   const footer = clsx(
-    "h-[100%]",
-    "text-black",
+    "w-full",
+    "bg-black",
+    "text-white",
     "font-funnel",
     "text-[20px]",
     "text-center",
@@ -166,8 +161,8 @@ export default function Home() {
   )
 
   return (
-    <div className={gradient}>
-      <div className={mainContainer}>
+    <div className={mainContainer}>
+      <div className={"h-full overflow-y-auto"}>
         <h1 className={titleContainer}>
           <span className={`${title} ${flipUp}`}>sofieski's wordels</span>
           <img className={`${profileImage} ${jumpIn}`} src="/sofieski.png" width="200px" />
@@ -175,10 +170,10 @@ export default function Home() {
         <div className={wordleContainer}>
           {wordles}
         </div>
-        <footer className={footer}>
-          <span className={signature}>Built with <FaHeart color="#F90605" /> by Rafa</span>
-        </footer>
       </div >
+      <footer className={footer}>
+        <span className={signature}>Built with <FaHeart color="#F90605" /> by Rafa</span>
+      </footer>
     </div >
   )
 }
