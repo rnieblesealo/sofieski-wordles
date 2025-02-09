@@ -3,7 +3,6 @@ import { supabase } from "../scripts/SupabaseHandler"
 import Wordle from "../components/Wordle"
 import { WordleTile } from "../components/Wordle"
 import { useState, useEffect } from "react"
-import { FaHeart } from "react-icons/fa";
 
 export default function Home() {
   const [wordles, setWordles] = useState<React.ReactNode[]>([])
@@ -137,29 +136,6 @@ export default function Home() {
     "animate-fill-both"
   )
 
-  const footer = clsx(
-    "w-full",
-    "bg-black",
-    "text-white",
-    "font-funnel",
-    "text-[20px]",
-    "text-center",
-    "font-bold",
-    "flex",
-    "justify-center"
-  )
-
-  const signature = clsx(
-    "font-tiny5",
-    "font-bold",
-    "flex",
-    "justify-center",
-    "items-center",
-    "self-end",
-    "w-[100%]",
-    "gap-[5px]"
-  )
-
   return (
     <div className={mainContainer}>
       <div className={"h-full overflow-y-auto"}>
@@ -171,9 +147,6 @@ export default function Home() {
           {wordles}
         </div>
       </div >
-      <footer className={footer}>
-        <span className={signature}>Built with <FaHeart color="#F90605" /> by Rafa</span>
-      </footer>
     </div >
   )
 }
