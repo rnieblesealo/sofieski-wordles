@@ -169,7 +169,7 @@ export default function Home() {
       <div className={mainContainer}>
         <h1 className={titleContainer}>
           <span className={`${title} ${flipUp}`}>sofieski's wordels</span>
-          <img className={`${profileImage} ${jumpIn}`} src="public/sofieski.png" width="200px" />
+          <img className={`${profileImage} ${jumpIn}`} src="/sofieski.png" width="200px" />
         </h1>
         <div className={wordleContainer}>
           {wordles}
