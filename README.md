@@ -14,7 +14,7 @@ It uses a WhatsApp bot in the backend, which:
 
 This frontend is subscribed to updates to said table, meaning that whenever she uploads a new solution, **it gets updated in real time!**
 
-***[Access the web app here!](https://sofieski-wordles.vercel.app/)
+***[Access the web app here!](https://sofieski-wordles.vercel.app/)***
 
 ---
 
